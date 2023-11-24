@@ -1,6 +1,11 @@
 import requests
 import json
 from config import keys
+from environs import Env
+
+env = Env()
+
+env.read_env(".env")
 
 
 class APIException(Exception):
@@ -33,7 +38,7 @@ class CurrencyConverter:
 
         conv = requests.get(f'https://free.currconv.com/api/v7/convert?q='
                             f'{quote_ticker}_{base_ticker}&compact=ultra'
-                            f'&apiKey=45eb6038478e4b29cd35')
+                            f'&apiKey={env.str("API_KEY")}')
         total_base = json.loads(conv.content)[f'{quote_ticker}_{base_ticker}']
 
         return total_base

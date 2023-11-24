@@ -1,4 +1,10 @@
-TOKEN = '5349784476:AAH9VKKugO8tUkIXPn30Xtl9Kl3u2wxlgnA'
+from environs import Env
+
+env = Env()
+
+env.read_env(".env")
+
+TOKEN = env.str("TOKEN")
 
 keys = {'доллар': 'USD',
         'евро': 'EUR',
